@@ -1,0 +1,22 @@
+﻿@model NCRSocialNetwork.Models.Event
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div id="event-description-div">
+	<p><b>Event:</b> @Html.DisplayFor(model => model.EventTitle)</p>
+	<p><b>Description:</b> @Html.DisplayFor(model => model.EventDescription)</p>
+	<p><b>Moderator:</b> Prasad E. </p>
+	<p><b>Target Audience:</b> Everyone</p>
+	<p><b>Date and Time:</b> @Html.DisplayFor(model => model.EventDate)</p>
+	<p><b>Venue:</b> @Html.DisplayFor(model => model.EventVenue)</p>
+</div>
+
+<ul>
+    <li>@Html.ActionLink("Edit", "Edit", new { id=Model.EventId })</li>
+	<li><a href="#">Comments</a></li>
+	<li><a href="#">Photos</a></li>
+	<li><a href="#">Videos</a></li>
+</ul>
+

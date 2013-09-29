@@ -1,0 +1,29 @@
+﻿@model NCRSocialNetwork.Models.EventLikeDislike
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>EventLikeDislike</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Event.EventTitle)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Event.EventTitle)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User.UserFirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.UserFirstName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.EventLikeDislikeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

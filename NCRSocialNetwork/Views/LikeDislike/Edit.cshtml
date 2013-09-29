@@ -1,0 +1,46 @@
+﻿@model NCRSocialNetwork.Models.EventLikeDislike
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>EventLikeDislike</legend>
+
+        @Html.HiddenFor(model => model.EventLikeDislikeId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventId, "Event")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("EventId", String.Empty)
+            @Html.ValidationMessageFor(model => model.EventId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserId, "User")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("UserId", String.Empty)
+            @Html.ValidationMessageFor(model => model.UserId)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

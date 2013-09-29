@@ -1,0 +1,110 @@
+﻿@model NCRSocialNetwork.ViewModels.AdminViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--Main Section: Actual website data goes in this section-->
+<section id="main_section">
+	<br>
+	<ul>
+		<li><a href="#">Events</a></li>
+    </ul>
+	<div id="articles-section">
+		<br>
+		<div class="all-data-div">
+			<table>
+				<tr>
+                    <th>S.No</th>
+					<th>Event</th>
+					<th>Club</th>
+					<th>Likes</th>
+					<th>Dislikes</th>
+					<th></th>
+				</tr>
+
+                @{
+                    var i = 1;    
+                }
+				@foreach(var Event in @Model.Event) 
+                {
+                    <tr>
+                        <td>@i</td>
+					    <td>@Event.EventTitle</td>
+					    <td>@Event.Club.ClubName</td>
+					    <td>@Model.EventLikeDislike.Count(e => e.EventId == Event.EventId && e.EventLike == 1)</td>
+					    <td>@Model.EventLikeDislike.Count(e => e.EventId == Event.EventId && e.EventLike == 0)</td>
+					    <td>
+                            @{
+                                var flag = 0;
+                                i++;
+                            }
+						    @foreach (var e in @Model.ClubEvent)
+                            {
+                                if (e.EventId == Event.EventId) { 
+                                    <input type="button" value="Add" disabled/>
+                                    flag = 1;
+                                    break;
+                                }
+                            }
+                            @if (flag == 0) { 
+                                <input type="button" onclick="location.href='/Admin/AddClub/EventId=@Event.EventId&ClubId=@Event.ClubId'" value="Add" />
+                            }
+                           
+						    <input type="button" onclick="location.href='/Event/Details/@Event.EventId.ToString()'" value="Details"/>
+					    </td>
+				    </tr>
+                }
+			</table>
+			<br>
+		</div>
+    </div>
+
+    <ul>
+	    <li><a href="#">Clubs</a></li>
+    </ul>
+    <br />
+    <div id="articles-section">
+		<div class="all-data-div">
+			<table>
+				<tr>
+					<th>S.No</th>
+					<th>Club</th>
+					<th>Description</th>
+					<th>Moderator</th>
+					<th>Total Events</th>
+					<th></th>
+				</tr>
+                @{
+                    i = 1;
+                 }
+				@foreach(var Club in @Model.Club) {   
+                    <tr>
+					    <td>@i</td>
+					    <td>@Club.ClubName</td>
+					    <td>@Club.ClubDescription</td>
+					    <td>Prasad E.</td>
+					    <td>@Club.ClubEvents.Count()</td>
+					    <td>
+						    <input type="button" value="Edit"/>
+					    </td>
+				    </tr>
+                    {
+                        i++;
+                    }     
+               }
+			</table>
+			<br>
+		</div>
+	</div>
+</section>
+<!--Sidebar: Userinfo and Login Information-->
+@section Aside{
+	<input type="text" placeholder="Event Name" />
+	<h3>Clubs</h3>
+	<article class="article_data">
+         @foreach(var Club in @Model.Club) {
+		    @Html.ActionLink(@Club.ClubName, @Club.ClubName, "Clubs")
+         }
+	</article>						
+}

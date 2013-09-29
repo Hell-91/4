@@ -1,0 +1,66 @@
+﻿@model NCRSocialNetwork.Models.Event
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Event</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventTitle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventTitle)
+            @Html.ValidationMessageFor(model => model.EventTitle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ClubId, "Club")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ClubId", String.Empty)
+            @Html.ValidationMessageFor(model => model.ClubId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventDescription)
+            @Html.ValidationMessageFor(model => model.EventDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventVenue)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventVenue)
+            @Html.ValidationMessageFor(model => model.EventVenue)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventDate)
+            @Html.ValidationMessageFor(model => model.EventDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to Home Page", "", "")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

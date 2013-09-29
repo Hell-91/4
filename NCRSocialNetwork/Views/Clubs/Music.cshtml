@@ -1,0 +1,236 @@
+﻿@model NCRSocialNetwork.ViewModels.MusicViewModel
+
+@{
+    ViewBag.Title = "Music";
+}
+
+<ul>
+	<li><a href="#">Recent Events</a></li>
+	<li><a href="#">Photos</a></li>
+	<li><a href="#">Videos</a></li>
+</ul>
+
+				<!--Articles: Displays most happening events-->
+<div id="articles-section">					
+	@foreach (var Event in @Model.Events)
+    {
+        <article id="@Event.EventId" class="event">
+		    <div id="event-image" class="event-image">
+			    <img src="\Content\Images\sports-logo.png" alt="" width="70em">
+		    </div>
+		    <div id="event-data" class="event-data">
+			    <div class="event-content">
+				    <p id="event_id_content">@Event.EventTitle</p>
+			    </div>
+			    <div class="event-operations">
+				    @if (@Model.EventLikeDislikes.Count(e => e.EventId == Event.EventId && e.UserId == 2) == 0)
+                    {
+                        @Ajax.ActionLink(
+                                "Like",
+                                "LikeEvent",
+                                "",
+                                new
+                                {
+                                    EventId = Event.EventId,
+                                    UserId = 2                                   
+                                },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "like-dislike-" + Event.EventId,
+                                    OnSuccess = "showeventlikeunlike("+Event.EventId+")"
+                                },
+                                new {@id="event_"+Event.EventId+"_like"}
+                            )
+                        @:
+                        @Ajax.ActionLink(
+                                "Dislike",
+                                "DislikeEvent",
+                                "",
+                                new
+                                {
+                                    EventId = Event.EventId,
+                                    UserId = 2
+                                },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "like-dislike-" + Event.EventId,
+                                    OnSuccess = "showeventlikeunlike("+Event.EventId+")"
+                                },
+                                new {@id="event_"+Event.EventId+"_dislike"}
+                            )
+                        @Ajax.ActionLink(
+                                "Unlike",
+                                "UnlikeEvent",
+                                "",
+                                new
+                                {
+                                    EventId = Event.EventId,
+                                    UserId = 2
+                                },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "like-dislike-" + Event.EventId,
+                                    OnSuccess = "hideeventlikeunlike("+Event.EventId+")"
+                                },
+                                new {@id="event_"+Event.EventId+"_unlike", @Style ="display: none;"}
+                            )
+                    }
+                    else
+                    {
+                         @Ajax.ActionLink(
+                                "Like",
+                                "LikeEvent",
+                                "",
+                                new
+                                {
+                                    EventId = Event.EventId,
+                                    UserId = 2,
+                                    id = "myId" 
+                                },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "like-dislike-" + Event.EventId,
+                                    OnSuccess = "showeventlikeunlike("+Event.EventId+")"
+                                },
+                                new {@id="event_"+Event.EventId+"_like", @Style ="display: none;"}
+                            )
+				        @:
+                        @Ajax.ActionLink(
+                                "Dislike",
+                                "DislikeEvent",
+                                "",
+                                new
+                                {
+                                    EventId = Event.EventId,
+                                    UserId = 2,
+                                    id = "myId" 
+                                },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "like-dislike-" + Event.EventId,
+                                    OnSuccess = "showeventlikeunlike("+Event.EventId+")"
+                                },
+                                new {@id="event_"+Event.EventId+"_dislike", @Style ="display: none;"}
+                            )
+                        @Ajax.ActionLink(
+                                "Unlike",
+                                "UnlikeEvent",
+                                "",
+                                new
+                                {
+                                    EventId = Event.EventId,
+                                    UserId = 2,
+                                    id = "myId" 
+                                },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "like-dislike-" + Event.EventId,
+                                    OnSuccess = "hideeventlikeunlike("+Event.EventId+")"
+                                },
+                                new {@id="event_"+Event.EventId+"_unlike"}
+                            )
+                       
+                    }                   
+				    <p id="event_id_comment"><a href="#">Comment</a></p>
+				    <p>@Html.ActionLink("Go to this event page", @Event.EventId.ToString(), "Event/Details")</p>
+				    <p id="event_id_date_posted">Posted on 25th Dec 2013</p>							
+			    </div>
+                 
+                     @if (Model.EventLikeDislikes.Count(e => e.EventId == Event.EventId && e.UserId == 2) == 0)
+                     {
+                             <p id="like-dislike-@Event.EventId" class="like-dislike" hidden>                     
+                                  @Model.EventLikeDislikes.Count(e => e.EventId == Event.EventId && e.EventLike == 1) like this event. @Model.EventLikeDislikes.Count(e => e.EventId == Event.EventId && e.EventLike == 0) dislike this event.
+                            </p> 
+                     }
+                     else
+                     {
+                        <p id="like-dislike-@Event.EventId" class="like-dislike">                     
+                              @Model.EventLikeDislikes.Count(e => e.EventId == Event.EventId && e.EventLike == 1) like this event. @Model.EventLikeDislikes.Count(e => e.EventId == Event.EventId && e.EventLike == 0) dislike this event.
+                        </p>
+                     }
+                 
+			    <div class="event-comments">	
+                    <div id="event-comments-@Event.EventId" class="comments">
+                        @foreach (var Comment in @Model.Comments)
+                        {
+                            if (Comment.EventId == @Event.EventId)
+                            {
+                                <div class="event-comment">
+					                <img src="\Content\Images\profile-picture_01.png" alt="" width="45em" height="45em">
+					                <p>@Html.ActionLink(@Comment.User.UserFirstName + ":  ", "")@Comment.EventCommentDescription</p>
+				                </div>
+                            }
+                        }
+                    </div>
+				    <div class="event-user-comment">	
+					    <img src="\Content\Images\profile-picture_07.png" alt="" width="45em" height="45em">
+					    <div>
+						    @using (Ajax.BeginForm(
+                                "SubmitComment",
+                                "",
+                                new
+                                {
+                                    UserId = 2,
+                                    EventId = Event.EventId,
+                                    UserName = "Murali"
+                                },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.InsertAfter,
+                                    UpdateTargetId = "event-comments-" + Event.EventId,
+                                    OnSuccess = "myonsuccess"
+                                }))
+                                { 
+                                    <textarea name="UserComment" class="UserComment" placeholder="Your comment here"></textarea>
+						            <input type="submit" value="Comment">
+                                }
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+	    </article>	
+ }
+</div>
+@section Aside {
+    <section id="profile_section">
+		<img src='@Url.Content("~/Content/Images/sports-logo.png")' alt="" width = "60%">	
+		<article id="profile_data">
+			<p><b>Club Name:</b> @Model.Club.ClubName</p>
+			<p><b>Description:</b> @Model.Club.ClubDescription</p>
+			<p><b>Moderator:</b> Prasad E. </p>
+			<p><b>No. of Events:</b> @Model.Events.Count()</p>
+			<p><b>No. of Users:</b> 40</p>	
+		</article>
+	</section>	
+	<br>
+	<input type="button" value="Join">
+	<input type="button" value="Message"> 
+	
+	<h3>Events</h3>
+	<article class="article_data">
+         @foreach(var clubEvent in @Model.Events) {
+		    <a href="new_event.html"><p>@clubEvent.EventTitle</p></a>
+         }
+	</article>
+		
+	<h3>People in this Club</h3>
+	<div id="club-members">
+         @for(var i = 1; i <= 8; i++) {
+		<img src='@Url.Content("~/Content/Images/profile-picture_0" + i + ".png")' alt="" width="45em" height="45em">
+         }
+	</div>
+}
+

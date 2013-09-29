@@ -1,0 +1,84 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - NCR SocialNetwork</title>	
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+         $(document).ready(function () {
+         });
+         function myonsuccess() {
+             //disable animated gif
+             $(".UserComment").val("");
+         }
+         function showeventlikeunlike(EventId) {
+             $("#like-dislike-" + EventId).toggle();
+             $("#event_" + EventId + "_like").css("display", "none");
+             $("#event_" + EventId + "_dislike").css("display", "none");
+             $("#event_" + EventId + "_unlike").css("display", "inline-block");
+             showcomments(EventId);
+         }
+
+         function hideeventlikeunlike(EventId) {
+             $("#like-dislike-" + EventId).toggle();
+             $("#event_" + EventId + "_like").css("display", "inline-block");
+             $("#event_" + EventId + "_dislike").css("display", "inline-block");
+             $("#event_" + EventId + "_unlike").css("display", "none");
+             showcomments(EventId);
+         }
+
+         function showcomments(EventId) {
+             $("#like-dislike-" + EventId).show();
+             $("#comments-" + EventId).css("display", "block");
+         }
+
+         function hidecomments(EventId) {
+         }
+    </script>
+   
+</head>
+<body>
+	<div id="main_body">
+		<header>
+			<img src='@Url.Content("~/Content/Images/logo.png")' width='80' > 
+			<h2>NCR Social Network</h2>
+		</header>
+
+		<nav>
+			<ul>
+				<li>@Html.ActionLink("Home", "Index", "")</li>
+				<li>@Html.ActionLink("Sports", "Sports", "Clubs")</li>				
+				<li>@Html.ActionLink("Health", "Health", "Clubs")</li>
+				<li>@Html.ActionLink("Dance", "Dance", "Clubs")</li>
+				<li>@Html.ActionLink("Festivals", "Festivals", "Clubs")</li>
+				<li>@Html.ActionLink("Music", "Music", "Clubs")</li>
+                <li><a href="#">Profile</a></li>
+				<li>@Html.ActionLink("Admin", "", "Admin")</li>		
+                	
+			</ul>				
+		</nav>
+
+		<!--Main body content starts here-->
+		<div id="content">
+			<!--Main Section: Actual website data goes in this section-->
+			<section id="main_section">
+				<br>				
+				@RenderBody()                	
+			</section>
+
+            <!--Sidebar: Userinfo and Login Information-->
+			<aside>
+				@RenderSection("Aside", required: false)
+			</aside>
+
+		</div>
+		<footer>
+			<p>NCR  2013 </p>
+		</footer>
+	</div>    
+    
+    @Scripts.Render("~/bundles/ajaxjquery")
+    @RenderSection("Scripts", required: false)	
+</body>
+</html>

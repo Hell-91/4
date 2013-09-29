@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NCRSocialNetworkModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="NCRSocialNetworkModelStoreContainer">
+          <EntitySet Name="ClubComments" EntityType="NCRSocialNetworkModel.Store.ClubComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClubEvents" EntityType="NCRSocialNetworkModel.Store.ClubEvents" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Clubs" EntityType="NCRSocialNetworkModel.Store.Clubs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClubSubscribtions" EntityType="NCRSocialNetworkModel.Store.ClubSubscribtions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EventComments" EntityType="NCRSocialNetworkModel.Store.EventComments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EventLikeDislikes" EntityType="NCRSocialNetworkModel.Store.EventLikeDislikes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Events" EntityType="NCRSocialNetworkModel.Store.Events" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserClub" EntityType="NCRSocialNetworkModel.Store.UserClub" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserEvent" EntityType="NCRSocialNetworkModel.Store.UserEvent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="NCRSocialNetworkModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ClubCommentClub" Association="NCRSocialNetworkModel.Store.FK_ClubCommentClub">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="ClubComments" EntitySet="ClubComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubEvent" Association="NCRSocialNetworkModel.Store.FK_ClubEvent">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubEventsClub" Association="NCRSocialNetworkModel.Store.FK_ClubEventsClub">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="ClubEvents" EntitySet="ClubEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubEventsEvent" Association="NCRSocialNetworkModel.Store.FK_ClubEventsEvent">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="ClubEvents" EntitySet="ClubEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubSubscribtionClub" Association="NCRSocialNetworkModel.Store.FK_ClubSubscribtionClub">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="ClubSubscribtions" EntitySet="ClubSubscribtions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventCommentEvent" Association="NCRSocialNetworkModel.Store.FK_EventCommentEvent">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventComments" EntitySet="EventComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventLikeDislikeEvent" Association="NCRSocialNetworkModel.Store.FK_EventLikeDislikeEvent">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventLikeDislikes" EntitySet="EventLikeDislikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClub_Club" Association="NCRSocialNetworkModel.Store.FK_UserClub_Club">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="UserClub" EntitySet="UserClub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClub_User" Association="NCRSocialNetworkModel.Store.FK_UserClub_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserClub" EntitySet="UserClub" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClubComment" Association="NCRSocialNetworkModel.Store.FK_UserClubComment">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ClubComments" EntitySet="ClubComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEvent_Event" Association="NCRSocialNetworkModel.Store.FK_UserEvent_Event">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="UserEvent" EntitySet="UserEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEvent_User" Association="NCRSocialNetworkModel.Store.FK_UserEvent_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserEvent" EntitySet="UserEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEventComment" Association="NCRSocialNetworkModel.Store.FK_UserEventComment">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EventComments" EntitySet="EventComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEventLikeDislike" Association="NCRSocialNetworkModel.Store.FK_UserEventLikeDislike">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EventLikeDislikes" EntitySet="EventLikeDislikes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClubComments">
+          <Key>
+            <PropertyRef Name="ClubCommentId" />
+          </Key>
+          <Property Name="ClubCommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="ClubCommentDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubEvents">
+          <Key>
+            <PropertyRef Name="ClubEventsId" />
+          </Key>
+          <Property Name="ClubEventsId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clubs">
+          <Key>
+            <PropertyRef Name="ClubId" />
+          </Key>
+          <Property Name="ClubId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClubName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClubDescription" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClubSubscribtions">
+          <Key>
+            <PropertyRef Name="ClubSubscriptionId" />
+          </Key>
+          <Property Name="ClubSubscriptionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventComments">
+          <Key>
+            <PropertyRef Name="EventCommentId" />
+          </Key>
+          <Property Name="EventCommentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="EventCommentDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventLikeDislikes">
+          <Key>
+            <PropertyRef Name="EventLikeDislikeId" />
+          </Key>
+          <Property Name="EventLikeDislikeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="EventLike" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EventTitle" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="EventDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EventVenue" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserClub">
+          <Key>
+            <PropertyRef Name="Users_UserId" />
+            <PropertyRef Name="Clubs_ClubId" />
+          </Key>
+          <Property Name="Users_UserId" Type="int" Nullable="false" />
+          <Property Name="Clubs_ClubId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserEvent">
+          <Key>
+            <PropertyRef Name="Users_UserId" />
+            <PropertyRef Name="Events_EventId" />
+          </Key>
+          <Property Name="Users_UserId" Type="int" Nullable="false" />
+          <Property Name="Events_EventId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserFirstName" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_ClubCommentClub">
+          <End Role="Clubs" Type="NCRSocialNetworkModel.Store.Clubs" Multiplicity="1" />
+          <End Role="ClubComments" Type="NCRSocialNetworkModel.Store.ClubComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubComments">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubEvent">
+          <End Role="Clubs" Type="NCRSocialNetworkModel.Store.Clubs" Multiplicity="1" />
+          <End Role="Events" Type="NCRSocialNetworkModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubEventsClub">
+          <End Role="Clubs" Type="NCRSocialNetworkModel.Store.Clubs" Multiplicity="1" />
+          <End Role="ClubEvents" Type="NCRSocialNetworkModel.Store.ClubEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubEvents">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubEventsEvent">
+          <End Role="Events" Type="NCRSocialNetworkModel.Store.Events" Multiplicity="1" />
+          <End Role="ClubEvents" Type="NCRSocialNetworkModel.Store.ClubEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="ClubEvents">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubSubscribtionClub">
+          <End Role="Clubs" Type="NCRSocialNetworkModel.Store.Clubs" Multiplicity="1" />
+          <End Role="ClubSubscribtions" Type="NCRSocialNetworkModel.Store.ClubSubscribtions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubSubscribtions">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventCommentEvent">
+          <End Role="Events" Type="NCRSocialNetworkModel.Store.Events" Multiplicity="1" />
+          <End Role="EventComments" Type="NCRSocialNetworkModel.Store.EventComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="EventComments">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventLikeDislikeEvent">
+          <End Role="Events" Type="NCRSocialNetworkModel.Store.Events" Multiplicity="1" />
+          <End Role="EventLikeDislikes" Type="NCRSocialNetworkModel.Store.EventLikeDislikes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="EventLikeDislikes">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClub_Club">
+          <End Role="Clubs" Type="NCRSocialNetworkModel.Store.Clubs" Multiplicity="1" />
+          <End Role="UserClub" Type="NCRSocialNetworkModel.Store.UserClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="UserClub">
+              <PropertyRef Name="Clubs_ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClub_User">
+          <End Role="Users" Type="NCRSocialNetworkModel.Store.Users" Multiplicity="1" />
+          <End Role="UserClub" Type="NCRSocialNetworkModel.Store.UserClub" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserClub">
+              <PropertyRef Name="Users_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClubComment">
+          <End Role="Users" Type="NCRSocialNetworkModel.Store.Users" Multiplicity="1" />
+          <End Role="ClubComments" Type="NCRSocialNetworkModel.Store.ClubComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ClubComments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEvent_Event">
+          <End Role="Events" Type="NCRSocialNetworkModel.Store.Events" Multiplicity="1" />
+          <End Role="UserEvent" Type="NCRSocialNetworkModel.Store.UserEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="UserEvent">
+              <PropertyRef Name="Events_EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEvent_User">
+          <End Role="Users" Type="NCRSocialNetworkModel.Store.Users" Multiplicity="1" />
+          <End Role="UserEvent" Type="NCRSocialNetworkModel.Store.UserEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserEvent">
+              <PropertyRef Name="Users_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEventComment">
+          <End Role="Users" Type="NCRSocialNetworkModel.Store.Users" Multiplicity="1" />
+          <End Role="EventComments" Type="NCRSocialNetworkModel.Store.EventComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EventComments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEventLikeDislike">
+          <End Role="Users" Type="NCRSocialNetworkModel.Store.Users" Multiplicity="1" />
+          <End Role="EventLikeDislikes" Type="NCRSocialNetworkModel.Store.EventLikeDislikes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EventLikeDislikes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NCRSocialNetworkModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NCRSocialNetworkDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="ClubComments" EntityType="NCRSocialNetworkModel.ClubComment" />
+          <EntitySet Name="Clubs" EntityType="NCRSocialNetworkModel.Club" />
+          <EntitySet Name="ClubSubscribtions" EntityType="NCRSocialNetworkModel.ClubSubscribtion" />
+          <EntitySet Name="EventComments" EntityType="NCRSocialNetworkModel.EventComment" />
+          <EntitySet Name="EventLikeDislikes" EntityType="NCRSocialNetworkModel.EventLikeDislike" />
+          <EntitySet Name="Events" EntityType="NCRSocialNetworkModel.Event" />
+          <EntitySet Name="Users" EntityType="NCRSocialNetworkModel.User" />
+          <AssociationSet Name="FK_ClubCommentClub" Association="NCRSocialNetworkModel.FK_ClubCommentClub">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="ClubComments" EntitySet="ClubComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClubComment" Association="NCRSocialNetworkModel.FK_UserClubComment">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ClubComments" EntitySet="ClubComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubEvent" Association="NCRSocialNetworkModel.FK_ClubEvent">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubSubscribtionClub" Association="NCRSocialNetworkModel.FK_ClubSubscribtionClub">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="ClubSubscribtions" EntitySet="ClubSubscribtions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventCommentEvent" Association="NCRSocialNetworkModel.FK_EventCommentEvent">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventComments" EntitySet="EventComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEventComment" Association="NCRSocialNetworkModel.FK_UserEventComment">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EventComments" EntitySet="EventComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventLikeDislikeEvent" Association="NCRSocialNetworkModel.FK_EventLikeDislikeEvent">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventLikeDislikes" EntitySet="EventLikeDislikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserEventLikeDislike" Association="NCRSocialNetworkModel.FK_UserEventLikeDislike">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="EventLikeDislikes" EntitySet="EventLikeDislikes" />
+          </AssociationSet>
+          <AssociationSet Name="UserClub" Association="NCRSocialNetworkModel.UserClub">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserEvent" Association="NCRSocialNetworkModel.UserEvent">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="ClubEvents" EntityType="NCRSocialNetworkModel.ClubEvent" />
+          <AssociationSet Name="FK_ClubEventsClub" Association="NCRSocialNetworkModel.FK_ClubEventsClub">
+            <End Role="Club" EntitySet="Clubs" />
+            <End Role="ClubEvent" EntitySet="ClubEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClubEventsEvent" Association="NCRSocialNetworkModel.FK_ClubEventsEvent">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="ClubEvent" EntitySet="ClubEvents" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClubComment">
+          <Key>
+            <PropertyRef Name="ClubCommentId" />
+          </Key>
+          <Property Name="ClubCommentId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="ClubCommentDescription" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Club" Relationship="NCRSocialNetworkModel.FK_ClubCommentClub" FromRole="ClubComments" ToRole="Clubs" />
+          <NavigationProperty Name="User" Relationship="NCRSocialNetworkModel.FK_UserClubComment" FromRole="ClubComments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="ClubId" />
+          </Key>
+          <Property Name="ClubId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ClubDescription" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubComments" Relationship="NCRSocialNetworkModel.FK_ClubCommentClub" FromRole="Clubs" ToRole="ClubComments" />
+          <NavigationProperty Name="Events" Relationship="NCRSocialNetworkModel.FK_ClubEvent" FromRole="Clubs" ToRole="Events" />
+          <NavigationProperty Name="ClubSubscribtions" Relationship="NCRSocialNetworkModel.FK_ClubSubscribtionClub" FromRole="Clubs" ToRole="ClubSubscribtions" />
+          <NavigationProperty Name="Users" Relationship="NCRSocialNetworkModel.UserClub" FromRole="Clubs" ToRole="Users" />
+          <NavigationProperty Name="ClubEvents" Relationship="NCRSocialNetworkModel.FK_ClubEventsClub" FromRole="Club" ToRole="ClubEvent" />
+        </EntityType>
+        <EntityType Name="ClubSubscribtion">
+          <Key>
+            <PropertyRef Name="ClubSubscriptionId" />
+          </Key>
+          <Property Name="ClubSubscriptionId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Club" Relationship="NCRSocialNetworkModel.FK_ClubSubscribtionClub" FromRole="ClubSubscribtions" ToRole="Clubs" />
+        </EntityType>
+        <EntityType Name="EventComment">
+          <Key>
+            <PropertyRef Name="EventCommentId" />
+          </Key>
+          <Property Name="EventCommentId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="EventCommentDescription" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="NCRSocialNetworkModel.FK_EventCommentEvent" FromRole="EventComments" ToRole="Events" />
+          <NavigationProperty Name="User" Relationship="NCRSocialNetworkModel.FK_UserEventComment" FromRole="EventComments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="EventLikeDislike">
+          <Key>
+            <PropertyRef Name="EventLikeDislikeId" />
+          </Key>
+          <Property Name="EventLikeDislikeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Event" Relationship="NCRSocialNetworkModel.FK_EventLikeDislikeEvent" FromRole="EventLikeDislikes" ToRole="Events" />
+          <NavigationProperty Name="User" Relationship="NCRSocialNetworkModel.FK_UserEventLikeDislike" FromRole="EventLikeDislikes" ToRole="Users" />
+          <Property Type="Int32" Name="EventLike" Nullable="false" DefaultValue="-1" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EventTitle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="EventDescription" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EventVenue" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Club" Relationship="NCRSocialNetworkModel.FK_ClubEvent" FromRole="Events" ToRole="Clubs" />
+          <NavigationProperty Name="EventComments" Relationship="NCRSocialNetworkModel.FK_EventCommentEvent" FromRole="Events" ToRole="EventComments" />
+          <NavigationProperty Name="EventLikeDislikes" Relationship="NCRSocialNetworkModel.FK_EventLikeDislikeEvent" FromRole="Events" ToRole="EventLikeDislikes" />
+          <NavigationProperty Name="Users" Relationship="NCRSocialNetworkModel.UserEvent" FromRole="Events" ToRole="Users" />
+          <NavigationProperty Name="ClubEvents" Relationship="NCRSocialNetworkModel.FK_ClubEventsEvent" FromRole="Event" ToRole="ClubEvent" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserFirstName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ClubComments" Relationship="NCRSocialNetworkModel.FK_UserClubComment" FromRole="Users" ToRole="ClubComments" />
+          <NavigationProperty Name="EventComments" Relationship="NCRSocialNetworkModel.FK_UserEventComment" FromRole="Users" ToRole="EventComments" />
+          <NavigationProperty Name="EventLikeDislikes" Relationship="NCRSocialNetworkModel.FK_UserEventLikeDislike" FromRole="Users" ToRole="EventLikeDislikes" />
+          <NavigationProperty Name="Clubs" Relationship="NCRSocialNetworkModel.UserClub" FromRole="Users" ToRole="Clubs" />
+          <NavigationProperty Name="Events" Relationship="NCRSocialNetworkModel.UserEvent" FromRole="Users" ToRole="Events" />
+        </EntityType>
+        <Association Name="FK_ClubCommentClub">
+          <End Role="Clubs" Type="NCRSocialNetworkModel.Club" Multiplicity="1" />
+          <End Role="ClubComments" Type="NCRSocialNetworkModel.ClubComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubComments">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClubComment">
+          <End Role="Users" Type="NCRSocialNetworkModel.User" Multiplicity="1" />
+          <End Role="ClubComments" Type="NCRSocialNetworkModel.ClubComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ClubComments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubEvent">
+          <End Role="Clubs" Type="NCRSocialNetworkModel.Club" Multiplicity="1" />
+          <End Role="Events" Type="NCRSocialNetworkModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubSubscribtionClub">
+          <End Role="Clubs" Type="NCRSocialNetworkModel.Club" Multiplicity="1" />
+          <End Role="ClubSubscribtions" Type="NCRSocialNetworkModel.ClubSubscribtion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubSubscribtions">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventCommentEvent">
+          <End Role="Events" Type="NCRSocialNetworkModel.Event" Multiplicity="1" />
+          <End Role="EventComments" Type="NCRSocialNetworkModel.EventComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="EventComments">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEventComment">
+          <End Role="Users" Type="NCRSocialNetworkModel.User" Multiplicity="1" />
+          <End Role="EventComments" Type="NCRSocialNetworkModel.EventComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EventComments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventLikeDislikeEvent">
+          <End Role="Events" Type="NCRSocialNetworkModel.Event" Multiplicity="1" />
+          <End Role="EventLikeDislikes" Type="NCRSocialNetworkModel.EventLikeDislike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="EventLikeDislikes">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserEventLikeDislike">
+          <End Role="Users" Type="NCRSocialNetworkModel.User" Multiplicity="1" />
+          <End Role="EventLikeDislikes" Type="NCRSocialNetworkModel.EventLikeDislike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="EventLikeDislikes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserClub">
+          <End Role="Clubs" Type="NCRSocialNetworkModel.Club" Multiplicity="*" />
+          <End Role="Users" Type="NCRSocialNetworkModel.User" Multiplicity="*" />
+        </Association>
+        <Association Name="UserEvent">
+          <End Role="Events" Type="NCRSocialNetworkModel.Event" Multiplicity="*" />
+          <End Role="Users" Type="NCRSocialNetworkModel.User" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ClubEvent">
+          <Key>
+            <PropertyRef Name="ClubEventsId" />
+          </Key>
+          <Property Type="Int32" Name="ClubEventsId" Nullable="false" />
+          <Property Type="Int32" Name="ClubId" Nullable="false" />
+          <Property Type="Int32" Name="EventId" Nullable="false" />
+          <NavigationProperty Name="Club" Relationship="NCRSocialNetworkModel.FK_ClubEventsClub" FromRole="ClubEvent" ToRole="Club" />
+          <NavigationProperty Name="Event" Relationship="NCRSocialNetworkModel.FK_ClubEventsEvent" FromRole="ClubEvent" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK_ClubEventsClub">
+          <End Type="NCRSocialNetworkModel.Club" Role="Club" Multiplicity="1" />
+          <End Type="NCRSocialNetworkModel.ClubEvent" Role="ClubEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Club">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="ClubEvent">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClubEventsEvent">
+          <End Type="NCRSocialNetworkModel.Event" Role="Event" Multiplicity="1" />
+          <End Type="NCRSocialNetworkModel.ClubEvent" Role="ClubEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="ClubEvent">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NCRSocialNetworkModelStoreContainer" CdmEntityContainer="NCRSocialNetworkDBEntities">
+          <EntitySetMapping Name="ClubComments">
+            <EntityTypeMapping TypeName="NCRSocialNetworkModel.ClubComment">
+              <MappingFragment StoreEntitySet="ClubComments">
+                <ScalarProperty Name="ClubCommentId" ColumnName="ClubCommentId" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="ClubCommentDescription" ColumnName="ClubCommentDescription" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clubs">
+            <EntityTypeMapping TypeName="NCRSocialNetworkModel.Club">
+              <MappingFragment StoreEntitySet="Clubs">
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="ClubDescription" ColumnName="ClubDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClubSubscribtions">
+            <EntityTypeMapping TypeName="NCRSocialNetworkModel.ClubSubscribtion">
+              <MappingFragment StoreEntitySet="ClubSubscribtions">
+                <ScalarProperty Name="ClubSubscriptionId" ColumnName="ClubSubscriptionId" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventComments">
+            <EntityTypeMapping TypeName="NCRSocialNetworkModel.EventComment">
+              <MappingFragment StoreEntitySet="EventComments">
+                <ScalarProperty Name="EventCommentId" ColumnName="EventCommentId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="EventCommentDescription" ColumnName="EventCommentDescription" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventLikeDislikes">
+            <EntityTypeMapping TypeName="NCRSocialNetworkModel.EventLikeDislike">
+              <MappingFragment StoreEntitySet="EventLikeDislikes">
+                <ScalarProperty Name="EventLike" ColumnName="EventLike" />
+                <ScalarProperty Name="EventLikeDislikeId" ColumnName="EventLikeDislikeId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="NCRSocialNetworkModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="EventTitle" ColumnName="EventTitle" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="EventDescription" ColumnName="EventDescription" />
+                <ScalarProperty Name="EventVenue" ColumnName="EventVenue" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="NCRSocialNetworkModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserClub" TypeName="NCRSocialNetworkModel.UserClub" StoreEntitySet="UserClub">
+            <EndProperty Name="Clubs">
+              <ScalarProperty Name="ClubId" ColumnName="Clubs_ClubId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="UserId" ColumnName="Users_UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserEvent" TypeName="NCRSocialNetworkModel.UserEvent" StoreEntitySet="UserEvent">
+            <EndProperty Name="Events">
+              <ScalarProperty Name="EventId" ColumnName="Events_EventId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="UserId" ColumnName="Users_UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="ClubEvents">
+            <EntityTypeMapping TypeName="NCRSocialNetworkModel.ClubEvent">
+              <MappingFragment StoreEntitySet="ClubEvents">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="ClubEventsId" ColumnName="ClubEventsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
