@@ -35,6 +35,15 @@
 
          function hidecomments(EventId) {
          }
+
+         function disableEventButton(EventId) {
+             $("AddEventToClub-" + EventId).bind('click', function (e) {
+                 alert("#AddEventToClub-" + EventId);
+                 e.preventDefault();
+             })
+         }
+
+         
     </script>
    
 </head>

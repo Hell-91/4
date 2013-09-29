@@ -310,7 +310,7 @@ textarea {
     padding: 0;
 }
 
-input[type="button"], input[type="submit"] {
+input[type="button"], input[type="submit"], .all-data-div a {
 	-moz-box-shadow: inset 0px 0px 0px 0px #ffffff;
 	-webkit-box-shadow: inset 0px 0px 0px 0px #ffffff;
 	box-shadow: inset 0px 0px 0px 0px #ffffff;
@@ -333,12 +333,12 @@ input[type="button"], input[type="submit"] {
 	margin-left: 0.25em;
 }
 
-input[type="button"]:hover, input[type="submit"]:hover {
+input[type="button"]:hover, input[type="submit"]:hover, .all-data-div a:hover {
 	background-color: #e9e9e9;
     cursor: pointer;
 }
 
-input[type="button"]:active, input[type="submit"]:hover {
+input[type="button"]:active, input[type="submit"]:active, .all-data-div a:active {
 	position:relative;
 }
 

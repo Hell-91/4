@@ -59,7 +59,7 @@ namespace NCRSocialNetwork.Controllers
             }
 
             ViewBag.ClubId = new SelectList(db.Clubs, "ClubId", "ClubName", Event.ClubId);
-            return View(Event);
+            return View("");
         }
 
         //

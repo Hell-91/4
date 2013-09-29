@@ -48,7 +48,7 @@ namespace NCRSocialNetwork.Controllers
         //
         // GET: /Admin/Create
 
-        public ActionResult Create()
+        public ActionResult AddClub()
         {
             ViewBag.ClubId = new SelectList(db.Clubs, "ClubId", "ClubName");
             ViewBag.EventId = new SelectList(db.Events, "EventId", "EventTitle");
@@ -57,7 +57,7 @@ namespace NCRSocialNetwork.Controllers
 
         //
         // POST: /Admin/Create
-
+        [HttpPost]
         public ActionResult AddClub(int EventId, int ClubId)
         {
             var clubevent = new ClubEvent()
@@ -70,7 +70,7 @@ namespace NCRSocialNetwork.Controllers
                 db.ClubEvents.Add(clubevent);
                 db.SaveChanges();                
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         //

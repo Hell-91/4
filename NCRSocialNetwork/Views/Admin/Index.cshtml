@@ -28,7 +28,7 @@
                 }
 				@foreach(var Event in @Model.Event) 
                 {
-                    <tr>
+                     <tr>
                         <td>@i</td>
 					    <td>@Event.EventTitle</td>
 					    <td>@Event.Club.ClubName</td>
@@ -42,13 +42,28 @@
 						    @foreach (var e in @Model.ClubEvent)
                             {
                                 if (e.EventId == Event.EventId) { 
-                                    <input type="button" value="Add" disabled/>
+                                    <input "AddEventToClub-@Event.EventId" type="button" value="Add" disabled/>
                                     flag = 1;
                                     break;
                                 }
                             }
                             @if (flag == 0) { 
-                                <input type="button" onclick="location.href='/Admin/AddClub/EventId=@Event.EventId&ClubId=@Event.ClubId'" value="Add" />
+                                @Ajax.ActionLink(
+                                    "Add",
+                                    "AddClub",
+                                    "Admin",
+                                    new
+                                    {
+                                        EventId = Event.EventId,
+                                        ClubId = Event.ClubId,                                  
+                                    },
+                                    new AjaxOptions
+                                    {
+                                        HttpMethod = "POST",
+                                        OnSuccess = "disableEventButton("+Event.EventId+")"
+                                    },
+                                    new {@id="AddEventToClub-"+Event.EventId, @class="AddEventToClub"}
+                                )
                             }
                            
 						    <input type="button" onclick="location.href='/Event/Details/@Event.EventId.ToString()'" value="Details"/>
